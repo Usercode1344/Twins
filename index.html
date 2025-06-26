@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TwinsTech - Reparación Profesional</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4 url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #ff9800;
+      font-size: 1.8rem;
+      animation: slideInLeft 1s ease-out;
+    }
+
+    nav a {
+      color: #333;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #ff9800;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.85), rgba(255, 243, 224, 0.8));
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      backdrop-filter: blur(3px);
+      animation: fadeIn 2s ease;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      color: #222;
+      animation: zoomIn 1.5s ease-out;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+
+    section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.7s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: #ff9800;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .servicio {
+      background: #fff8f0;
+      padding: 2rem;
+      border-radius: 14px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      border: 1px solid #ffd699;
+    }
+
+    .servicio:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .servicio i {
+      font-size: 2.5rem;
+      color: #ff9800;
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+
+    .contacto-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      margin-top: 2rem;
+    }
+
+    .contacto-form input,
+    .contacto-form textarea {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #fff;
+      color: #222;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .contacto-form input:focus,
+    .contacto-form textarea:focus {
+      outline: none;
+      border-color: #ff9800;
+      box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
+    }
+
+    .contacto-form button {
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contacto-form button:hover {
+      background: #fb8c00;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #1f1f1f;
+      color: #ddd;
+      font-size: 0.9rem;
+      border-top: 4px solid #ff9800;
+    }
+
+    .marca-agua {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.75rem;
+      color: rgba(255, 152, 0, 0.3);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 200;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 2rem;
+        padding: 0 1rem;
+      }
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>TwinsTech</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="inicio">
+    <h2>Soluciones confiables para tu celular</h2>
+  </div>
+
+  <main>
+    <section id="nosotros">
+      <h2>¿Quiénes somos?</h2>
+      <p>En <strong>TwinsTech</strong> nos especializamos en reparación de celulares, tablets y otros dispositivos móviles. Con años de experiencia, ofrecemos diagnósticos precisos, atención personalizada y repuestos originales. Nuestro objetivo es que vuelvas a disfrutar de tu dispositivo como nuevo, sin largas esperas ni altos costos.</p>
+    </section>
+
+    <section id="servicios">
+      <h2>Servicios</h2>
+      <div class="servicios">
+        <div class="servicio">
+          <i class="ri-smartphone-line"></i>
+          <h3>Pantallas rotas</h3>
+          <p>Reemplazo rápido con pantallas originales y resistentes.</p>
+        </div>
+        <div class="servicio">
+          <i class="ri-battery-charge-line"></i>
+          <h3>Cambio de batería</h3>
+          <p>Baterías duraderas con instalación segura y limpia.</p>
+        </div>
+        <div class="servicio">
+          <i class="ri-tools-line"></i>
+          <h3>Reparaciones generales</h3>
+          <p>Botones, cámaras, puertos, sonido ¡todo solucionado!</p>
+        </div>
+        <div class="servicio">
+          <i class="ri-mac-line"></i>
+          <h3>Software y limpieza</h3>
+          <p>Formateo, desbloqueos, optimización de sistema y más.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>Podés escribirnos a: <strong>twins.tech123@gmail.com</strong></p>
+      <form class="contacto-form">
+        <input type="text" placeholder="Tu nombre" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <input type="tel" placeholder="Número de teléfono (opcional)">
+        <textarea rows="5" placeholder="Escribí tu mensaje..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 TwinsTech | WhatsApp: +54 11 1234 5678 | Email: twins.tech123@gmail.com
+  </footer>
+
+  <div class="marca-agua">TwinsTech | Diseño web profesional</div>
+
+  <a href="https://wa.me/5491112345678" target="_blank" class="whatsapp-btn">
+    <i class="ri-whatsapp-line"></i>
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+    document.querySelector('.contacto-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por contactarte con TwinsTech. Te responderemos pronto.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
